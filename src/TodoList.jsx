@@ -30,8 +30,8 @@ const TodoList = () => {
     setInput("")
   }
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id))
+  const handleDelete = (id) => {
+  setTodos(todos.filter(todo => todo.id !== id))
   }
 
   return (
@@ -70,12 +70,12 @@ const TodoList = () => {
         </div>
 
         <ul className="todo-list">
-          {todos.map((item, index) => (
-            <li key={item.id} style={{ animationDelay: `${index * 0.1}s` }}>
+          {todos.map((item) => (
+            <li key={item.id}>
               <span>{item.text}</span>
               <button
                 className="delete-btn"
-                onClick={() => deleteTodo(item.id)}
+                onClick={() => handleDelete(item.id)}
               >
                 Delete
               </button>
