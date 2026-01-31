@@ -1,44 +1,89 @@
 import React from 'react'
 import './TodoList.css'
 import avatar from './assets/image/profile.webp'
+import { useState } from "react"
 
 const TodoList = () => {
+  const [darkMode, setDarkMode] = useState(false)
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn JavaScript" },
+    { id: 2, text: "Learn React" },
+    { id: 3, text: "Build Project" },
+  ])
+  const [input, setInput] = useState("")
+
+  const toggleMode = () => {
+    setDarkMode(!darkMode)
+    document.body.classList.toggle("dark-mode")
+  }
+
+  const addTodo = () => {
+    if (input.trim() === "") {
+      alert("Please enter a todo item.")
+      return
+    }
+
+    setTodos([
+      ...todos,
+      { id: Date.now(), text: input }
+    ])
+    setInput("")
+  }
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
   return (
-    <div>
-      <section class="app-container">
-      <div class="card profile-section">
-        <div class="profile-header">
-          <img src={avatar} alt="Avatar" class="avatar" />
+    <section className={`app-container ${darkMode ? "dark" : ""}`}>
+      <div className="card profile-section">
+        <div className="profile-header">
+          <img src={avatar} alt="Avatar" className="avatar" />
           <div>
-            <h2 id="name-display">Gilang Ramadan</h2>
-            <p class="role">Frontend Developer</p>
+            <h2>Gilang Ramadan</h2>
+            <p className="role">Frontend Developer</p>
           </div>
         </div>
-        <p class="bio">
+
+        <p className="bio">
           Front-End Developer yang berfokus pada pengembangan antarmuka web responsif dengan perhatian pada detail dan pengalaman pengguna.
         </p>
 
-        <button id="switch-mode" class="btn btn-secondary">
+        <button className="btn btn-secondary" onClick={toggleMode}>
           🌙 Switch Mode
         </button>
       </div>
 
-      <div class="card todo-section">
+      <div className="card todo-section">
         <h3>My Tasks</h3>
 
-        <div class="input-group">
+        <div className="input-group">
           <input
             type="text"
-            id="todo-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Tulis tugas baru..."
           />
-          <button id="add-btn" class="btn btn-primary">Add</button>
+          <button className="btn btn-primary" onClick={addTodo}>
+            Add
+          </button>
         </div>
 
-        <ul id="todo-list" class="todo-list"></ul>
+        <ul className="todo-list">
+          {todos.map((item, index) => (
+            <li key={item.id} style={{ animationDelay: `${index * 0.1}s` }}>
+              <span>{item.text}</span>
+              <button
+                className="delete-btn"
+                onClick={() => deleteTodo(item.id)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
-    </div>
   )
 }
 
