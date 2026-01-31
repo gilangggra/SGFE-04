@@ -1,5 +1,6 @@
 import React from 'react'
 import './TodoList.css'
+import avatar from './assets/image/profile.webp'
 
 const TodoList = () => {
   return (
@@ -7,7 +8,7 @@ const TodoList = () => {
       <section class="app-container">
       <div class="card profile-section">
         <div class="profile-header">
-          <img src="images/profile.webp" alt="Avatar" class="avatar" />
+          <img src={avatar} alt="Avatar" class="avatar" />
           <div>
             <h2 id="name-display">Gilang Ramadan</h2>
             <p class="role">Frontend Developer</p>
