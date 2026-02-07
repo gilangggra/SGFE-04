@@ -5,11 +5,7 @@ import { useState } from "react"
 
 const TodoList = () => {
   const [darkMode, setDarkMode] = useState(false)
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn JavaScript" },
-    { id: 2, text: "Learn React" },
-    { id: 3, text: "Build Project" },
-  ])
+  const [todos, setTodos] = useState([])
   const [input, setInput] = useState("")
 
   const toggleMode = () => {
